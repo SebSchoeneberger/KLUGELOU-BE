@@ -3,6 +3,7 @@ import cors from 'cors';
 import './DB/index.js';
 import errorHandler from './middlewares/errorHandler.js';
 import stonesRouter from './routes/stonesRouter.js';
+import adminRouter from './routes/adminRouter.js';
 
 
 const app = express();
@@ -16,6 +17,7 @@ app.get('/', (req, res) => {
     });
 
 app.use('/stones', stonesRouter);
+app.use('/admin', adminRouter);
 
 app.use('*', (req, res,) => res.status(404).json({ success: false, error: 'Route not found on KLUGELOU API' }));    
 app.use(errorHandler);
