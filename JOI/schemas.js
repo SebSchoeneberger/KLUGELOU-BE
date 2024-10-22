@@ -8,7 +8,7 @@ export const stoneValidationSchema = Joi.object({
   starSign: Joi.string().optional(),
   chakra: Joi.string().optional(),
   element: Joi.string().optional(),
-  charching: Joi.string().optional(),
+  charging: Joi.string().optional(),
   discharging: Joi.string().optional(),
   createdAt: Joi.date().default(() => new Date()).optional(),
   updatedAt: Joi.date().default(() => new Date()).optional(),
