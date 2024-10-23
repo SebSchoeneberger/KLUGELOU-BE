@@ -12,6 +12,10 @@ const StoneSchema = new Schema({
     element: { type: String, required: false },
     charging: { type: String, required: false },
     discharging: { type: String, required: false },
+    description: { type: String, required: false },
+    healingPotential: { type: Schema.Types.Mixed, required: false },
+    howToUse: { type:  Schema.Types.Mixed, required: false },
+    otherInfo: { type:  Schema.Types.Mixed, required: false },
     createdAt: { type: Date, default: Date.now }, 
     updatedAt: { type: Date, default: Date.now },
 });

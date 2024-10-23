@@ -6,8 +6,8 @@ import verifyToken from "../middlewares/verifyToken.js";
 
 const stonesRouter = Router();
 
-stonesRouter.route('/').get(getStones).post(verifyToken, validateJOI(stoneValidationSchema), createStone);
+stonesRouter.route('/').get(getStones).post(verifyToken, validateJOI(stoneValidationSchema.POST), createStone);
 
-stonesRouter.route('/:id').get(getStone).put(verifyToken, validateJOI(stoneValidationSchema), updateStone).delete(verifyToken,deleteStone);
+stonesRouter.route('/:id').get(getStone).put(verifyToken, validateJOI(stoneValidationSchema.PUT), updateStone).delete(verifyToken,deleteStone);
 
 export default stonesRouter;
