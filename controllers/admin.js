@@ -44,10 +44,22 @@ export const loginAdmin = asynchandler(async (req, res, next) => {
     const payload = {
         email: admin.email,
         role: admin.role,
+        id: admin._id,
     };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRE});
 
-    res.status(200).json({ success: true, message: 'Login successful', token });
+
+    res.status(200).json({ success: true, message: 'Login successful', token, admin: payload });
 });
 
+export const getAdmin = asynchandler(async (req, res, next) => {
+    const {id} = req.user;
+
+    const admin = await Admin.findById(id);
+    if (!admin) {
+        return next(new ErrorResponse(`Admin not found with id: ${id}`, 404));
+    }
+
+    res.status(200).json({ success: true, admin: { email: admin.email, role: admin.role, id: admin._id } });
+})
