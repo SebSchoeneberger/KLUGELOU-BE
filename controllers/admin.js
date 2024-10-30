@@ -62,4 +62,25 @@ export const getAdmin = asynchandler(async (req, res, next) => {
     }
 
     res.status(200).json({ success: true, admin: { email: admin.email, role: admin.role, id: admin._id } });
-})
+});
+
+export const changePassword = asynchandler(async (req, res, next) => {
+    const { id } = req.user; // Extract admin ID from the token
+    const { currentPassword, newPassword } = req.body;
+
+    const admin = await Admin.findById(id);
+    if (!admin) {
+        return next(new ErrorResponse(`Admin not found with id: ${id}`, 404));
+    }
+
+    const isMatch = await bcrypt.compare(currentPassword, admin.password);
+    if (!isMatch) {
+        return next(new ErrorResponse(`Current password is incorrect`, 401));
+    }
+
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+    admin.password = hashedNewPassword;
+    await admin.save();
+
+    res.status(200).json({ success: true, message: 'Password changed successfully' });
+});

@@ -58,3 +58,9 @@ export const AdminValidationSchema = Joi.object({
   role: Joi.string().default("admin").optional(),
   createdAt: Joi.date().default(() => new Date()).optional(),
 });
+
+
+export const ChangePasswordValidationSchema = Joi.object({
+  currentPassword: Joi.string().required(),
+  newPassword: Joi.string().required().min(6).max(20),
+});
