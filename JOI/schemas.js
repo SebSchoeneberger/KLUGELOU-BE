@@ -12,18 +12,6 @@ export const stoneValidationSchema = {
     charging: Joi.string().allow("").optional(),
     discharging: Joi.string().allow("").optional(),
     description: Joi.string().allow("").optional(),
-    healingPotential: Joi.alternatives().try(
-      Joi.string().allow(""),
-      Joi.array().items(Joi.string()).optional() 
-    ).optional(),
-    howToUse: Joi.alternatives().try(
-      Joi.string().allow(""), 
-      Joi.array().items(Joi.string()).optional()
-    ).optional(),
-    otherInfo: Joi.alternatives().try(
-      Joi.string().allow(""),
-      Joi.array().items(Joi.string()).optional()
-    ).optional(),
   }),
   
   PUT: Joi.object({
@@ -37,18 +25,6 @@ export const stoneValidationSchema = {
     charging: Joi.string().allow("").optional(),
     discharging: Joi.string().allow("").optional(),
     description: Joi.string().allow("").optional(),
-    healingPotential: Joi.alternatives().try(
-      Joi.string().allow(""), 
-      Joi.array().items(Joi.string()).optional() 
-    ).optional(),
-    howToUse: Joi.alternatives().try(
-      Joi.string().allow(""), 
-      Joi.array().items(Joi.string()).optional() 
-    ).optional(),
-    otherInfo: Joi.alternatives().try(
-      Joi.string().allow(""), 
-      Joi.array().items(Joi.string()).optional()
-    ).optional(),
   }),
 };
 
