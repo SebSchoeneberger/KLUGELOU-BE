@@ -65,7 +65,7 @@ export const getAdmin = asynchandler(async (req, res, next) => {
 });
 
 export const changePassword = asynchandler(async (req, res, next) => {
-    const { id } = req.user; // Extract admin ID from the token
+    const { id } = req.user;
     const { currentPassword, newPassword } = req.body;
 
     const admin = await Admin.findById(id);

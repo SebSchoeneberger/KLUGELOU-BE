@@ -12,21 +12,18 @@ export const getStones = asynchandler(async (req, res, next) => {
 });
 
 export const getStone = asynchandler(async (req, res, next) => {
-
     const { id } = req.params;
 
-    if (!isValidObjectId(id)) {
-        return next(new ErrorResponse(`Invalid Id:${id}`, 404));
-    }
+    const query = isValidObjectId(id) ? { _id: id } : { name: id.replace(/_/g, ' ') };
 
-    const stone = await Stones.findById(id);
+    const stone = await Stones.findOne(query);
 
     if (!stone) {
-        return next(new ErrorResponse(`Stone not found with id of ${id}`, 404));
+        return next(new ErrorResponse(`Stone not found with ${isValidObjectId(id) ? 'id' : 'name'} of ${id}`, 404));
     }
 
-    res.status(200).json({ success: true, data: stone });
-}); 
+    return res.status(200).json({ success: true, data: stone });
+});
 
 export const createStone = asynchandler(async (req, res, next) => {
 
